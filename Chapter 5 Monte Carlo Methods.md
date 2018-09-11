@@ -21,7 +21,7 @@ F - MC의 경우 각 return 은 i.i.d를 만족한다<br>
 각 S의 평균 state-value는 unbiased 이지만 finite variance가 존재
 - unbiased measure인 이유는 fixed policy에 대한 average sampling 은 sample의 갯수가 무한대에 가까워지면 실제 모평균과의 차이가 0에 수렴
 - variance는 1/root(n) 이기에, sampling이 늘어날수록 줄어듬
-- 결국 수렴
+- 결국 수렴<br>
 몬테카를로의 특징
 - N(S) 와 무관하게 episode 내에 있는 state만 이용한다
   - 이를 이용하면 update하고 싶은 S = s 가 있을때, 이 s를 시작점으로 하는 episode를 sampling하게 되면 N(S) 의 크기에 관계없이 target state 업데이트가 가능
