@@ -16,12 +16,14 @@ policy는 주어졌으며 고정, 이상태에서 stat-value function을 구한�
 <br><br>
 First-visit MC vs. Every-visit MC
 - F - MC : episode 내 가장 처음 발견된 S = s 에 대해서 expected return을 update에 사용
-- E - MC : episode 내 발견되는 S = s 마다 expected return을 update에 사용
+- E - MC : episode 내 발견되는 S = s 마다 expected return을 update에 사용<br>
+<br>
 F - MC의 경우 각 return 은 i.i.d를 만족한다<br>
 각 S의 평균 state-value는 unbiased 이지만 finite variance가 존재
 - unbiased measure인 이유는 fixed policy에 대한 average sampling 은 sample의 갯수가 무한대에 가까워지면 실제 모평균과의 차이가 0에 수렴
 - variance는 1/root(n) 이기에, sampling이 늘어날수록 줄어듬
 - 결국 수렴<br>
+<br>
 몬테카를로의 특징
 - N(S) 와 무관하게 episode 내에 있는 state만 이용한다
   - 이를 이용하면 update하고 싶은 S = s 가 있을때, 이 s를 시작점으로 하는 episode를 sampling하게 되면 N(S) 의 크기에 관계없이 target state 업데이트가 가능
@@ -53,8 +55,9 @@ ES방식에서 벗어나기 위해서는 두가지 방식이 있다
 <br>
 On-policy F-MC control
 - 다른건 다 같지만, policy update를 greedy한걸 state에 deterministic하게 정해주는게 아니라
-- e-soft 방식으로 update 해줌
-히지만 On-policy 방식은 convergence를 해도 epsion-policy space 에서의 convergence이기에 optimal policy는 되지 못한다
+- e-soft 방식으로 update 해줌<br>
+<br>
+하지만 On-policy 방식은 convergence를 해도 epsion-policy space 에서의 convergence이기에 optimal policy는 되지 못한다
 
 ### 5.5 Off-policy Prediction via Importance Sampling
 위의 on-policy 방식의 한계를 벗어나기 위해, Off-policy는 두개의 policy를 사용한다. behavior policy for search, target policy for learning
