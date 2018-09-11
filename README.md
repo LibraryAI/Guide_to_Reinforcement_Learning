@@ -1,5 +1,5 @@
 # Notes on Reinforcement Learning: An Introduction
-Sutton Barto 의 Reinforcement Learning: An Introduction 주요 포인트 노트 정리<br>
+Sutton Barto 의 Reinforcement Learning: An Introduction 주요 포인트  노트 정리<br>
 
 - Chapter 1
 - [Chapter 2. Multi-armed Bandits](https://github.com/LibraryAI/Guide_to_Reinforcement_Learning/blob/master/Chapter%202%20Multi-Armed%20Bandits.md)
