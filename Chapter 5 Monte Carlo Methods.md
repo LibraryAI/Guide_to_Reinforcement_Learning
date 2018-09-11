@@ -16,15 +16,15 @@ policy는 주어졌으며 고정, 이상태에서 stat-value function을 구한�
 <br><br>
 First-visit MC vs. Every-visit MC
 - F - MC : episode 내 가장 처음 발견된 S = s 에 대해서 expected return을 update에 사용
-- E - MC : episode 내 발견되는 S = s 마다 expected return을 update에 사용<br>
+- E - MC : episode 내 발견되는 S = s 마다 expected return을 update에 사용
 <br>
 F - MC의 경우 각 return 은 i.i.d를 만족한다<br>
-각 S의 평균 state-value는 unbiased 이지만 finite variance가 존재
+각 S의 평균 state-value는 unbiased 이지만 finite variance가 존재<br>
 - unbiased measure인 이유는 fixed policy에 대한 average sampling 은 sample의 갯수가 무한대에 가까워지면 실제 모평균과의 차이가 0에 수렴
 - variance는 1/root(n) 이기에, sampling이 늘어날수록 줄어듬
-- 결국 수렴<br>
+- 결국 수렴
 <br>
-몬테카를로의 특징
+몬테카를로의 특징<br>
 - N(S) 와 무관하게 episode 내에 있는 state만 이용한다
   - 이를 이용하면 update하고 싶은 S = s 가 있을때, 이 s를 시작점으로 하는 episode를 sampling하게 되면 N(S) 의 크기에 관계없이 target state 업데이트가 가능
   - 결국 원하는 특정 subset만 update하기에 매우 용이하고, 따라서 computational expense를 많이 줄임
@@ -42,18 +42,20 @@ F - MC의 경우 각 return 은 i.i.d를 만족한다<br>
 Evaluation - Improvement 방식은 두가지 맹점이 존재
 - evaluation에서 infinite loop를 통한 optimal value 도출은 현실적으로 불가능
 - exploring start 도 사실 말이 안됨
-이중 infinite loop를 해결하는 방식은 good old Value iteration 방식인, Monte Carlo with Exporing Start
+<br>
+이중 infinite loop를 해결하는 방식은 good old Value iteration 방식인, Monte Carlo with Exporing Start<br>
 - 첫번째 차이는 exploring start 부분이 삽입
 - 두번째 차이는 매 episode에 first visit 을 확인한 후 해당 q(s,a)에 대해 argmax 를 해줘서 policy update을 함
-Avoiding convergence to Suboptimal policy
+<br>
+Avoiding convergence to Suboptimal policy<br>
 - policy k 가 매번 바뀌면서 새로운 episode의 experience는 전 episode와 다른 p(s,a)를 가지게 되고 따라서 특정 policy k에 대한 convergence가 나올 수 없음
 
 ### 5.4 Monte CArlo Control without ES
 ES방식에서 벗어나기 위해서는 두가지 방식이 있다
-1) On-policy : experience search (action selection) 에 사용하는 policy를 그대로 업데이트, 그리고 다시 search에 사용
-2) Off-policy
+- On-policy : experience search (action selection) 에 사용하는 policy를 그대로 업데이트, 그리고 다시 search에 사용
+- Off-policy
 <br>
-On-policy F-MC control
+On-policy F-MC control<br>
 - 다른건 다 같지만, policy update를 greedy한걸 state에 deterministic하게 정해주는게 아니라
 - e-soft 방식으로 update 해줌
 <br>
