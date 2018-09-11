@@ -59,12 +59,11 @@ On-policy F-MC control
 ### 5.5 Off-policy Prediction via Importance Sampling
 위의 on-policy 방식의 한계를 벗어나기 위해, Off-policy는 두개의 policy를 사용한다. behavior policy for search, target policy for learning
 
-### Sample Q&A from RL study
+### Sample Q&A
 (5.7)<br>
 __Q :__ off-policy MC control 에서 non-greedy한 행동이 많을 때 초반 상태들의 학습이 느려지는 이유는 importance-sampling ratio가 작아져서라고 생각하면 될까요?
 __A :__ Target policy는 greedy deterministic selection을 하는 반면 behavior는 non-greedy selection을 하는경우가 많으면 π(a|s) = 0 이 돼서 해당 (s,a) pair부터 앞쪽까지는 importance sampling ratio가 다 0이 됩니다.
 terminal state, action pair부터 역순으로 루프가 돌아가는데 초반은 importance × G 가 다 0이되어버려서 학습이 아예 안되는 문제점이 생겨서 학습이 느려지는것 같습니다 
 
-__Q :__전 애초에 policy가 다른데 왜 state action의 흐름을 똑같이 정의하고 term을 삭제해버렸는지 모르겠습니다. 애초에 state action의 흐름을 파이에 맞춰놓고 bias에 따른확률을 dominater에 넣은걸까요?
-__A :__ 음 policy가 달라도 두 policy의 인자가 되는 {S} 와 {A} 는 같으니깐 state action의 흐름을 똑같이 정의하는것은 문제가 되지 않습니다. 다만 behavior는 target을 coverage로 두지만, target은 behavior를 coverage로 두지않죠
-state action sequence를 target에 맞추는것과, behavior에 따른 확률을 분모에 넣는건 importance sampling method가 5.4 식의 Expectation에서 expectation 요소인 
+__Q :__ policy가 다른데 왜 state action의 흐름을 똑같이 정의하고 term을 삭제해버렸는지 모르겠습니다. state action의 흐름을 파이에 맞춰놓고 bias에 따른확률을 dominater에 넣은걸까요?
+__A :__ 음 policy가 달라도 두 policy의 인자가 되는 {S} 와 {A} 는 같으니깐 state action의 흐름을 똑같이 정의하는것은 문제가 되지 않습니다. 다만 behavior는 target을 coverage로 두지만, target은 behavior를 coverage로 두지않죠. state action sequence를 target에 맞추는것과, behavior에 따른 확률을 분모에 넣는건 importance sampling method가 5.4 식의 Expectation에서 expectation 요소인 
