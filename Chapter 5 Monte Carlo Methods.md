@@ -14,23 +14,22 @@ Episode가 끝났을 때, value function과 policy가 갱신되며 따라서 epi
 여느 Prediction method in RL 이 그렇듯
 policy는 주어졌으며 고정, 이상태에서 stat-value function을 구한다
 <br><br>
-__First-visit MC vs. Every-visit MC__<br>
-- F - MC : episode 내 가장 처음 발견된 S = s 에 대해서 expected return을 update에 사용<br>
-- E - MC : episode 내 발견되는 S = s 마다 expected return을 update에 사용
+__First-visit MC vs. Every-visit MC__ <br>
+* F - MC : episode 내 가장 처음 발견된 S = s 에 대해서 expected return을 update에 사용<br>
+  * First-visit MC의 경우 각 return은 i.i.d.를 만족한다. 각 S의 평균 state-value는 unbiased 이지만 finitie variance가 존재
+    * E[V(S)] 가 unbiased measure인 이유는 fixed policy에 대한 average sampling 은 sample의 갯수가 무한대에 가까워지면 실제 모평균과의 차이가 0에 수렴하기 때문
+    * variance는 1/root(n) 이기에, sampling이 늘어날수록 줄어듬
+* E - MC : episode 내 발견되는 S = s 마다 expected return을 update에 사용
 <br>
-F - MC의 경우 각 return 은 i.i.d를 만족한다. 각 S의 평균 state-value는 unbiased 이지만 finite variance가 존재<br>
-- unbiased measure인 이유는 fixed policy에 대한 average sampling 은 sample의 갯수가 무한대에 가까워지면 실제 모평균과의 차이가 0에 수렴<br>
-- variance는 1/root(n) 이기에, sampling이 늘어날수록 줄어듬
-- 결국 수렴
-<br>
-__몬테카를로의 특징__<br>
+
+__몬테카를로의 특징__ <br>
 - N(S) 와 무관하게 episode 내에 있는 state만 이용한다<br>
   - 이를 이용하면 update하고 싶은 S = s 가 있을때, 이 s를 시작점으로 하는 episode를 sampling하게 되면 N(S) 의 크기에 관계없이 target state 업데이트가 가능<br>
   - 결국 원하는 특정 subset만 update하기에 매우 용이하고, 따라서 computational expense를 많이 줄임<br>
 - 각 state 별 estimate들은 독립적이다<br>
   - DP 에서는 다음 step에서의 state-value를 통해 현재 step의 state-value를 update. dependent<br>
   - 그러나 여기서는 각 state-value는 상관없이 episode의 experience에 대한 각 expected reward를 가지고 update<br>
-  - __No bootstraping - No estimation from estimation__<br>
+  - __No bootstraping - No estimation from estimation__
 
 ### 5.2 Monte Carlo Estimation of Action Values
 만약 모델이 없다면, v(s) 만으로 충분하지 않다. 모델이 없다면, state-action value 를 estimation 하는 방식으로 접근해야함<br>
@@ -40,13 +39,12 @@ __몬테카를로의 특징__<br>
 ### 5.3 Monte Carlo Control
 __Evaluation - Improvement 방식은 두가지 맹점이 존재__
 - evaluation에서 infinite loop를 통한 optimal value 도출은 현실적으로 불가능<br>
-- exploring start 도 사실 말이 안됨
+  - Value Iteration 방식인 __Monte Carlo with Exploring Start__ 알고리즘을 통해서 해결
+    - 매 episode에 first visit을 확인한 후 해당 q(s,a)에 대해 argmax를 해줘서 policy update를 함
+- 하지만 실제 환경에서는 exploring start 가정은 성립하기 어려움
 <br>
-이중 infinite loop를 해결하는 방식은 good old Value iteration 방식인, __Monte Carlo with Exporing Start__<br>
-- 첫번째 차이는 exploring start 부분이 삽입<br>
-- 두번째 차이는 매 episode에 first visit 을 확인한 후 해당 q(s,a)에 대해 argmax 를 해줘서 policy update을 함
-<br>
-__Avoiding convergence to Suboptimal policy__<br>
+
+__Avoiding convergence to Suboptimal policy__ <br>
 - policy k 가 매번 바뀌면서 새로운 episode의 experience는 전 episode와 다른 p(s,a)를 가지게 되고 따라서 특정 policy k에 대한 convergence가 나올 수 없음
 
 ### 5.4 Monte CArlo Control without ES
@@ -54,6 +52,7 @@ __ES방식에서 벗어나기 위해서는 두가지 방식이 있다__
 - On-policy : experience search (action selection) 에 사용하는 policy를 그대로 업데이트, 그리고 다시 search에 사용<br>
 - Off-policy
 <br>
+
 __On-policy F-MC control__<br>
 - 다른건 다 같지만, policy update를 greedy한걸 state에 deterministic하게 정해주는게 아니라<br>
 - e-soft 방식으로 update 해줌
